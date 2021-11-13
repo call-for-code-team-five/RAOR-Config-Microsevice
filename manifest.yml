@@ -1,0 +1,6 @@
+---
+applications:
+- name: configurationmicroservice
+  buildpack: nodejs_buildpack
+  path: .
+  memory: 128M

@@ -7,7 +7,7 @@ const Sequelize = require('sequelize');
 const getDBConfiguration = require('./controller/dbConfiguration').getDBConfiguration()
 const getObjectStoreConfiguration = require('./controller/objectStoreConfiguration').getObjectStoreConfiguration()
 
-const port = process.env.PORT || 9001
+const port = process.env.PORT || 8002
 
 app.use(express.json());
 

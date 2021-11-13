@@ -5,8 +5,9 @@ let dbname, dbuser, dbpassword, dbport, dbhost, dbssl, dialectOptions
 let sequelize
 
 const getDBConfiguration = () => {
-    if (process.env.ENVIRONMENT == "SAPBTP") { //// If the Configuration Microservice is running in SAP Cloud
-
+    if (process.env.ENVIRONMENT == "SAPBTP" || process.env.ENVIRONMENT == "IBMCLOUD") { //// If the Configuration Microservice is running in SAP Cloud
+        console.log('VCAP_Services')
+        console.log(JSON.parse(process.env.VCAP_SERVICES))
         // Return DB Details from VCAP_Services 
         dbname = JSON.parse(process.env.VCAP_SERVICES)["postgresql-db"][0]["credentials"]["dbname"]
         dbuser = JSON.parse(process.env.VCAP_SERVICES)["postgresql-db"][0]["credentials"]["username"]
@@ -21,13 +22,6 @@ const getDBConfiguration = () => {
             }
         }
 
-        // sequelize = new Sequelize(dbname, dbuser, dbpassword, {
-        //     host: dbhost,
-        //     dialect: 'postgres',
-        //     port: dbport,
-        //     logging: false,
-        //     dialectOptions: dialectOptions
-        // });
     } else if (process.env.ENVIRONMENT == "Local") { //// If the Configuration Microservice is running in Local
 
         // Return DB Details from Local Environment Variables
@@ -39,12 +33,6 @@ const getDBConfiguration = () => {
         dbssl = false
         dialectOptions = {}
 
-        // sequelize = new Sequelize(dbname, dbuser, dbpassword, {
-        //     host: dbhost,
-        //     dialect: 'postgres',
-        //     port: dbport,
-        //     logging: false
-        // });
     }
 
     sequelize = new Sequelize(dbname, dbuser, dbpassword, {

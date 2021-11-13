@@ -1,3 +1,4 @@
+require('dotenv').config()
 
 const Sequelize = require('sequelize');
 
@@ -7,7 +8,7 @@ let sequelize
 const getDBConfiguration = () => {
     if (process.env.ENVIRONMENT == "SAPBTP" || process.env.ENVIRONMENT == "IBMCLOUD") { //// If the Configuration Microservice is running in SAP Cloud
         console.log('Environment Variables')
-        console.log(JSON.parse(process.env))
+        console.log((process.env))
         // Return DB Details from VCAP_Services 
         dbname = JSON.parse(process.env.VCAP_SERVICES)["postgresql-db"][0]["credentials"]["dbname"]
         dbuser = JSON.parse(process.env.VCAP_SERVICES)["postgresql-db"][0]["credentials"]["username"]

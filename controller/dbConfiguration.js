@@ -6,9 +6,8 @@ let dbname, dbuser, dbpassword, dbport, dbhost, dbssl, dialectOptions
 let sequelize
 
 const getDBConfiguration = () => {
-    if (process.env.ENVIRONMENT == "SAPBTP" || process.env.ENVIRONMENT == "IBMCLOUD") { //// If the Configuration Microservice is running in SAP Cloud
-        console.log('Environment Variables')
-        console.log((process.env))
+    if (process.env.ENVIRONMENT == "SAPBTP") { //// If the Configuration Microservice is running in SAP Cloud
+        
         // Return DB Details from VCAP_Services 
         dbname = JSON.parse(process.env.VCAP_SERVICES)["postgresql-db"][0]["credentials"]["dbname"]
         dbuser = JSON.parse(process.env.VCAP_SERVICES)["postgresql-db"][0]["credentials"]["username"]
@@ -34,6 +33,14 @@ const getDBConfiguration = () => {
         dbssl = false
         dialectOptions = {}
 
+    } else if (process.env.ENVIRONMENT == "IBMCLOUD") {
+        dbname = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["database"]
+        dbuser = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["authentication"]["username"]
+        dbpassword = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["authentication"]["password"]
+        dbport = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["hosts"][0]["port"]
+        dbhost = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["hosts"][0]["hostname"]
+        dbssl = false
+        dialectOptions = {}
     }
 
     sequelize = new Sequelize(dbname, dbuser, dbpassword, {

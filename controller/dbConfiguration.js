@@ -34,6 +34,7 @@ const getDBConfiguration = () => {
         dialectOptions = {}
 
     } else if (process.env.ENVIRONMENT == "IBMCLOUD") {
+        console.log(JSON.parse(process.env.pgdbinstancecloud))
         dbname = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["database"]
         dbuser = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["authentication"]["username"]
         dbpassword = JSON.parse(process.env.pgdbinstancecloud)["postgres"]["authentication"]["password"]

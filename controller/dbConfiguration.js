@@ -39,8 +39,10 @@ const getDBConfiguration = () => {
         dbpassword = process.env.PGPASSWORD
         dbport = process.env.PGPORT
         dbhost = process.env.PGHOST
-        dbssl = false
-        dialectOptions = {}
+        dbssl = true
+        dialectOptions = {
+            ca: new Buffer(process.env.PGCERTIFICATE, 'base64')
+        }
     }
 
     sequelize = new Sequelize(dbname, dbuser, dbpassword, {

@@ -41,7 +41,11 @@ const getDBConfiguration = () => {
         dbhost = process.env.PGHOST
         dbssl = true
         dialectOptions = {
-            ca: new Buffer(process.env.PGCERTIFICATE, 'base64')
+            ssl: {
+                ca: new Buffer(process.env.PGCERTIFICATE, 'base64'),
+                require: dbssl,
+                rejectUnauthorized: false
+            }
         }
     }
 

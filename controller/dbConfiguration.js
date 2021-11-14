@@ -34,13 +34,11 @@ const getDBConfiguration = () => {
         dialectOptions = {}
 
     } else if (process.env.ENVIRONMENT == "IBMCLOUD") {
-        console.log(JSON.parse(process.env.pgdbinstancecloud))
-
-        dbname = JSON.parse(process.env.pgdbinstancecloud)["connection"]["postgres"]["database"]
-        dbuser = JSON.parse(JSON.parse(process.env.pgdbinstancecloud)["connection"]["postgres"])["authentication"]["username"]
-        dbpassword = JSON.parse(JSON.parse(process.env.pgdbinstancecloud)["connection"]["postgres"])["authentication"]["password"]
-        dbport = JSON.parse(JSON.parse(process.env.pgdbinstancecloud)["connection"]["postgres"])["hosts"][0]["port"]
-        dbhost = JSON.parse(JSON.parse(process.env.pgdbinstancecloud)["connection"]["postgres"])["hosts"][0]["hostname"]
+        dbname = process.env.PGDATABASE
+        dbuser = process.env.PGUSER
+        dbpassword = process.env.PGPASSWORD
+        dbport = process.env.PGPORT
+        dbhost = process.env.PGHOST
         dbssl = false
         dialectOptions = {}
     }

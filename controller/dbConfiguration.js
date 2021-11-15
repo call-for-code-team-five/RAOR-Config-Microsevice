@@ -22,18 +22,20 @@ const getDBConfiguration = () => {
             }
         }
 
-    } else if (process.env.ENVIRONMENT == "Local") { //// If the Configuration Microservice is running in Local
+    }
+    //  else if (process.env.ENVIRONMENT == "Local") { //// If the Configuration Microservice is running in Local
 
-        // Return DB Details from Local Environment Variables
-        dbname = process.env.DBNAME
-        dbuser = process.env.DBUSER
-        dbpassword = process.env.DBPASSWORD
-        dbport = 5432
-        dbhost = 'localhost'
-        dbssl = false
-        dialectOptions = {}
+    //     // Return DB Details from Local Environment Variables
+    //     dbname = process.env.DBNAME
+    //     dbuser = process.env.DBUSER
+    //     dbpassword = process.env.DBPASSWORD
+    //     dbport = 5432
+    //     dbhost = 'localhost'
+    //     dbssl = false
+    //     dialectOptions = {}
 
-    } else if (process.env.ENVIRONMENT == "IBMCLOUD") {
+    // }
+     else if (process.env.ENVIRONMENT == "IBMCLOUD" || process.env.ENVIRONMENT == "Local") {
         dbname = process.env.PGDATABASE
         dbuser = process.env.PGUSER
         dbpassword = process.env.PGPASSWORD
